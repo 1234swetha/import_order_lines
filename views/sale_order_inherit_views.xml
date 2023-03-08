@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inherit_sale_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//header//button[@name='action_quotation_send']" position="before">
+                <button name="import_lines" string="Import Lines" type="object"
+                        attrs="{'invisible': [('state','!=','draft')]}"/>
+                <field name="imported" invisible="1"/>
+            </xpath>
+            <xpath expr="//div[@class='alert alert-warning mb-0']" position="before">
+            <div class="alert alert-warning oe_edit_only" role="alert" attrs="{'invisible': [('imported','!=',True)]}">
+                     <p>Successfully imported</p>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
